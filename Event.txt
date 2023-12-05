@@ -1,0 +1,25 @@
+This code is a Python script that connects to a MySQL database, creates a new database called "event_management," and creates three tables: "events," "users," and "bookings." 
+The script then includes functions for managing events, event bookings, user registration and login, viewing events, and booking events. 
+The main program also includes an admin panel and a user panel, where users can perform different actions based on their permissions.
+ Finally, the script closes the database connection at the end.
+
+
+
+
+The code is a Python program for an event management system. It uses a MySQL database to store information about events, users, and bookings. Here's a breakdown of the key functions used in the code:
+
+manage_events(): This function allows an admin to add new events to the system and view all existing events.
+
+manage_event_bookings(): This function allows an admin to view bookings for a specific event by entering the event ID.
+
+register_user(): This function is used for user registration, where a new user can enter their username and password to create a new account.
+
+login_user(): This function is used for user login, where an existing user can enter their username and password to access the system.
+
+view_all_events(): This function allows users to view all available events in the system.
+
+book_event(user_id): This function allows users to book an event by selecting the event ID, date, and location.
+
+user_login(): This function provides the user interface for user registration, login, and event booking.
+
+admin_login(): This function provides the admin interface for managing events and event bookings.
