@@ -1,0 +1,24 @@
+This code is a Python program used for school management. It uses MySQL to store information about students and teachers. The program has features for registering students and teachers, editing their details, deleting them, and displaying information about them. It also manages the movement of students and teachers to a 'Left' status when they are no longer active. The program uses a while loop to continuously prompt the user for input and provide options for managing student and teacher data. It also includes some ASCII art for aesthetic appeal. The code demonstrates interaction with databases, error handling, and user input handling. At the end, it closes the MySQL connection.
+
+
+The given program seems to be a school management system written in Python using the MySQL database. The program includes various functions for managing student and teacher data. Here's a brief explanation of the functions:
+
+Register_Student: This function allows the user to register a new student by inputting their details such as first name, last name, class, date of birth, address, and contact number. It then inserts this data into the 'students' table in the database.
+
+Edit_Student: This function enables the user to edit the details of an existing student based on their admission number. It provides the option to update the student's first name, last name, class, date of birth, address, and contact number in the database.
+
+Delete_Student: The function allows the user to delete a student's data based on their admission number. After deletion, the student's record is moved to the 'left_students' table, indicating that they are no longer active.
+
+Show_Students: This function retrieves and displays the details of all active students from the 'students' table as well as the details of students who have left from the 'left_students' table.
+
+Left_Studs: This function specifically displays the details of students who have left the school, fetching information from the 'left_students' table in the database.
+
+Register_Teacher: Similar to registering a student, this function allows the user to register a new teacher by inputting their first name, last name, contact number, qualification, subjects, and designation. It then inserts this data into the 'teachers' table in the database.
+
+Edit_Teacher: This function enables the user to edit the details of an existing teacher based on their teacher ID. It provides the option to update the teacher's first name, last name, contact number, qualification, subjects, and designation in the database.
+
+Delete_Teacher: The function allows the user to delete a teacher's data based on their teacher ID. After deletion, the teacher's record is moved to the 'left_teachers' table, indicating that they are no longer active.
+
+Show_Teachers: This function retrieves and displays the details of all active teachers from the 'teachers' table as well as the details of teachers who have left from the 'left_teachers' table.
+
+Left_Teach: This function specifically displays the details of teachers who have left the school, fetching information from the 'left_teachers' table in the database.
