@@ -1,9 +1,8 @@
-# import calendar as c
-# from datetime import datetime
+import calendar as c
+from datetime import datetime
 
-# now = datetime.now()
-# y, m = now.year, now.month
+now = datetime.now()
+y, m = now.year, now.month
 
-# print(c.month(theyear=y, themonth=m))
+print(c.month(theyear=y, themonth=m))
 
-print("जय श्री राम")
