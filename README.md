@@ -4,9 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Basic Python Projects</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        h1, h2, h3 {
+            text-align: center;
+            color: #4CAF50;
+        }
+        ul {
+            list-style-type: square;
+            padding: 0 20px;
+        }
+        li {
+            margin-bottom: 15px;
+        }
+        code {
+            background-color: #e8e8e8;
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-family: "Courier New", Courier, monospace;
+        }
+        p {
+            margin: 10px 0;
+        }
+        ol {
+            padding: 0 20px;
+        }
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
 </head>
 <body>
-    <h1 align="center">Basic Python Projects</h1>
+    <h1>Basic Python Projects</h1>
     <p align="center">This repository contains a collection of Python projects demonstrating various functionalities, including database management, GUI applications, and more.</p>
 
     <h2>Project List</h2>
@@ -79,8 +119,8 @@
     <h2>License</h2>
     <p>This project is licensed under the MIT License.</p>
 
-    <h3 align="center" style="color: gray;">
-        💧 Created with ❤ by <b>Prince Raj Singh</b> from <b style="font-family: 'Courier New', monospace; letter-spacing: 2px;">ＣＡＲＮＡＧＥ ＳＥＮＴＩＮＥＬＳ</b> 💧
-    </h3>
+    <footer>
+        💧 Created with ❤ by <b>Prince Raj Singh</b> from <b>ＣＡＲＮＡＧＥ ＳＥＮＴＩＮＥＬＳ</b> 💧
+    </footer>
 </body>
 </html>
