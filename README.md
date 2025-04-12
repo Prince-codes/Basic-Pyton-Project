@@ -1,86 +1,90 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Basic Python Projects</title>
-</head>
-<body>
-    <h1>Basic Python Projects</h1>
-    <p>This repository contains a collection of Python projects demonstrating various functionalities, including database management, GUI applications, and more.</p>
+<h1 align="center">🌟 Basic Python Projects 🌟</h1>
 
-    <h2>Project List</h2>
-    <ul>
-        <li>
-            <h3>School Management System</h3>
-            <p>File: <code>SCHOOL _MANAGEMENT_FINAL.py</code></p>
-            <p>Description: A Python program for managing students and teachers in a school using MySQL.</p>
-        </li>
-        <li>
-            <h3>Event Management System</h3>
-            <p>File: <code>Event_Management.py</code></p>
-            <p>Description: A Python script for managing events, users, and bookings.</p>
-        </li>
-        <li>
-            <h3>Library Management System</h3>
-            <p>File: <code>library_management.py</code></p>
-            <p>Description: A Python program for managing library books, borrowing, and returning operations using MySQL.</p>
-        </li>
-        <li>
-            <h3>Hotel Management System</h3>
-            <p>File: <code>hotel_management.py</code></p>
-            <p>Description: A Python program for managing hotel bookings, room information, and payments.</p>
-        </li>
-        <li>
-            <h3>Hospital Management System</h3>
-            <p>File: <code>hospital_management.py</code></p>
-            <p>Description: A Python program for managing patient admissions, billing, and discharge operations.</p>
-        </li>
-        <li>
-            <h3>Employee Management System</h3>
-            <p>Files: <code>employee_management.py</code>, <code>employee_management_2.py</code></p>
-            <p>Description: Python programs for managing employee details.</p>
-        </li>
-        <li>
-            <h3>Bank Management System</h3>
-            <p>File: <code>bank_management.py</code></p>
-            <p>Description: A Python program for managing bank accounts, deposits, and withdrawals.</p>
-        </li>
-        <li>
-            <h3>Bookstore Management System</h3>
-            <p>File: <code>bookstore.py</code></p>
-            <p>Description: A Python program for managing books in a bookstore.</p>
-        </li>
-        <li>
-            <h3>Calendar Display</h3>
-            <p>File: <code>calender.py</code></p>
-            <p>Description: A simple Python script to display the current month's calendar.</p>
-        </li>
-        <li>
-            <h3>Tic-Tac-Toe Game</h3>
-            <p>File: <code>tic_tac.py</code></p>
-            <p>Description: A Python GUI-based Tic-Tac-Toe game built using <code>tkinter</code>.</p>
-        </li>
-        <li>
-            <h3>Automated Messaging</h3>
-            <p>File: <code>auto_messanging.py</code></p>
-            <p>Description: A Python script for automated messaging using <code>pyautogui</code>.</p>
-        </li>
-    </ul>
+<p align="center">
+This repository contains a collection of Python programs that demonstrate various concepts and functionalities in Python programming. The programs cover topics such as management systems, games, automation, and more.
+</p>
 
-    <h2>Setup Instructions</h2>
-    <ol>
-        <li>Install Python 3.x.</li>
-        <li>Install required libraries using <code>pip install -r requirements.txt</code>.</li>
-        <li>Ensure MySQL is installed and running on your system.</li>
-        <li>Update database credentials in the scripts as needed.</li>
-    </ol>
+---
 
-    <h2>License</h2>
-    <p>This project is licensed under the MIT License.</p>
+<h2>📂 List of Program Files</h2>
 
-    <footer>
-        <p>💧 Created with ❤ by <b>Prince Raj Singh</b> from <b>ＣＡＲＮＡＧＥ ＳＥＮＴＩＮＥＬＳ</b> 💧</p>
-    </footer>
-</body>
-</html>
+<h3>🛠️ Management Systems</h3>
+<ul>
+  <li><b>employee_management.py</b>: A system to manage employee records, including adding, updating, and removing employees.</li>
+  <li><b>employee_management_2.py</b>: Another version of the employee management system with similar functionalities.</li>
+  <li><b>hospital_management.py</b>: A system to manage hospital patients, including admitting, discharging, and billing.</li>
+  <li><b>hotel_management.py</b>: A system to manage hotel bookings, restaurant orders, and payments.</li>
+  <li><b>library_management.py</b>: A system to manage library books, including borrowing, returning, and user management.</li>
+  <li><b>bank_management.py</b>: A system to manage bank accounts, including deposits, withdrawals, and account modifications.</li>
+  <li><b>SCHOOL _MANAGEMENT_FINAL.py</b>: A school management system to handle student and teacher records.</li>
+  <li><b>Event_Management.py</b>: A system to manage events, including user registrations and bookings.</li>
+</ul>
+
+---
+
+<h3>🎮 Games</h3>
+<ul>
+  <li><b>tic_tac.py</b>: A simple Tic-Tac-Toe game implemented using the Tkinter library.</li>
+</ul>
+
+---
+
+<h3>📊 Utility Programs</h3>
+<ul>
+  <li><b>calender.py</b>: Displays the current month's calendar using the `calendar` module.</li>
+  <li><b>auto_messanging.py</b>: Automates repetitive messaging tasks using the `pyautogui` library.</li>
+</ul>
+
+---
+
+<h3>📚 Bookstore</h3>
+<ul>
+  <li><b>bookstore.py</b>: A system to manage a bookstore, including adding, modifying, and searching for books.</li>
+</ul>
+
+---
+
+<h3>📜 Text Files</h3>
+<ul>
+  <li><b>Event.txt</b>: Describes the functionality of the event management system.</li>
+  <li><b>School_Management_Description.txt</b>: Provides an overview of the school management system.</li>
+</ul>
+
+---
+
+<h2>🛠️ How to Run</h2>
+<ol>
+  <li>Clone the repository to your local machine:
+    <pre><code>git clone https://github.com/your-username/Basic-Python-Projects.git
+cd Basic-Python-Projects</code></pre>
+  </li>
+  <li>Install the required dependencies (if any) using pip:
+    <pre><code>pip install -r requirements.txt</code></pre>
+  </li>
+  <li>Run the desired Python file using:
+    <pre><code>python filename.py</code></pre>
+  </li>
+</ol>
+
+---
+
+<h2>📜 License</h2>
+<p>This repository is licensed under the <b>MIT License</b>. You are free to use, modify, and distribute the code for personal or commercial purposes, provided that proper credit is given to the original author.</p>
+
+<h3>⚠️ Disclaimer</h3>
+<p>This repository is intended for educational purposes only. The author is not responsible for any misuse or damage caused by the use of this code.</p>
+
+---
+
+<h2 align="center">📧 Contact</h2>
+<p align="center">If you have any questions or suggestions, feel free to reach out via <a href="https://github.com/your-username/Basic-Python-Projects/issues">GitHub Issues</a>.</p>
+
+---
+
+<h3 align="center">🌟 Don't forget to leave a star if you find this repository helpful! 🌟</h3>
+
+---
+
+<h3 align="center" style="color: gray;">
+💧 Created with ❤️ by <b>Prince Raj Singh</b> from <b style="font-family: 'Courier New', monospace; letter-spacing: 2px;">ＣＡＲＮＡＧＥ ＳＥＮＴＩＮＥＬＳ</b> 💧
+</h3>
