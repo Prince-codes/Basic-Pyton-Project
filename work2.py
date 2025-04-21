@@ -60,6 +60,8 @@ class LoginWindow:
         login_btn = ttk.Button(root, text="Login", command=self.check_login)
         login_btn.grid(row=2, column=0, columnspan=2, pady=10)
 
+        root.bind("<Return>", lambda event: self.check_login())
+
     def check_login(self):
         username = self.username_entry.get()
         password = self.password_entry.get()
@@ -72,60 +74,106 @@ class LoginWindow:
         else:
             messagebox.showerror("Login Failed", "Invalid username or password")
 
+class ScrollableFrame(ttk.Frame):
+    def __init__(self, container, *args, **kwargs):
+        super().__init__(container, *args, **kwargs)
+
+        canvas = tk.Canvas(self)
+        scrollbar = ttk.Scrollbar(self, orient="vertical", command=canvas.yview)
+        self.scrollable_frame = ttk.Frame(canvas)
+
+        self.scrollable_frame.bind("<Configure>", lambda e: canvas.configure(scrollregion=canvas.bbox("all")))
+        canvas.create_window((0, 0), window=self.scrollable_frame, anchor="nw")
+        canvas.configure(yscrollcommand=scrollbar.set)
+
+        canvas.pack(side="left", fill="both", expand=True)
+        scrollbar.pack(side="right", fill="y")
+
+        # Mouse wheel scrolling
+        self.scrollable_frame.bind("<Enter>", lambda e: self._bind_to_mousewheel(canvas))
+        self.scrollable_frame.bind("<Leave>", lambda e: self._unbind_from_mousewheel(canvas))
+
+    def _bind_to_mousewheel(self, widget):
+        widget.bind_all("<MouseWheel>", lambda e: widget.yview_scroll(-1 * int(e.delta / 120), "units"))
+
+    def _unbind_from_mousewheel(self, widget):
+        widget.unbind_all("<MouseWheel>")
+
 class EmployeeTaskApp:
     def __init__(self, root):
         self.root = root
         self.root.title("Employee and Task Management")
-        self.root.geometry("800x650")
+        self.root.geometry("900x750")
 
-        self.tab_control = ttk.Notebook(root)
-        self.employee_tab = ttk.Frame(self.tab_control)
-        self.task_tab = ttk.Frame(self.tab_control)
-        self.tab_control.add(self.employee_tab, text="Employees")
-        self.tab_control.add(self.task_tab, text="Tasks")
-        self.tab_control.pack(expand=1, fill="both")
+        self.scrollable = ScrollableFrame(self.root)
+        self.scrollable.pack(fill="both", expand=True)
+        self.frame = self.scrollable.scrollable_frame
 
-        self.employees = []
-        self.tasks = []
+        self.create_ui()
 
-        self.create_task_tab()
-        self.create_employee_tab()
+    def create_ui(self):
+        # EMPLOYEE SECTION
+        ttk.Label(self.frame, text="Employees", font=("Arial", 14, "bold")).grid(row=0, column=0, columnspan=2, pady=10, sticky="w")
+
+        ttk.Label(self.frame, text="Name:").grid(row=1, column=0, sticky="e")
+        self.emp_name = ttk.Entry(self.frame)
+        self.emp_name.grid(row=1, column=1, sticky="w")
+
+        ttk.Label(self.frame, text="Position:").grid(row=2, column=0, sticky="e")
+        self.emp_position = ttk.Entry(self.frame)
+        self.emp_position.grid(row=2, column=1, sticky="w")
+
+        ttk.Label(self.frame, text="Department:").grid(row=3, column=0, sticky="e")
+        self.emp_department = ttk.Entry(self.frame)
+        self.emp_department.grid(row=3, column=1, sticky="w")
+
+        ttk.Button(self.frame, text="Add Employee", command=self.add_employee).grid(row=4, column=0, columnspan=2, pady=10)
+
+        self.emp_list = ttk.Treeview(self.frame, columns=("ID", "Name", "Position", "Department"), show="headings", height=8)
+        for col in ("ID", "Name", "Position", "Department"):
+            self.emp_list.heading(col, text=col)
+        self.emp_list.grid(row=5, column=0, columnspan=2, padx=10)
+
+        ttk.Button(self.frame, text="Delete Employee", command=self.delete_employee).grid(row=6, column=0, columnspan=2, pady=5)
+
+        # TASK SECTION
+        ttk.Label(self.frame, text="Tasks", font=("Arial", 14, "bold")).grid(row=7, column=0, columnspan=2, pady=15, sticky="w")
+
+        ttk.Label(self.frame, text="Task Name:").grid(row=8, column=0, sticky="e")
+        self.task_name = ttk.Entry(self.frame)
+        self.task_name.grid(row=8, column=1, sticky="w")
+
+        ttk.Label(self.frame, text="Assign To:").grid(row=9, column=0, sticky="e")
+        self.task_emp = ttk.Combobox(self.frame)
+        self.task_emp.grid(row=9, column=1, sticky="w")
+
+        ttk.Label(self.frame, text="Deadline:").grid(row=10, column=0, sticky="e")
+        self.task_deadline = DateEntry(self.frame, date_pattern="yyyy-mm-dd")
+        self.task_deadline.grid(row=10, column=1, sticky="w")
+
+        ttk.Label(self.frame, text="Status:").grid(row=11, column=0, sticky="e")
+        self.task_status = ttk.Combobox(self.frame, values=["Pending", "In Progress", "Completed"], state="readonly")
+        self.task_status.grid(row=11, column=1, sticky="w")
+        self.task_status.set("Pending")
+
+        ttk.Label(self.frame, text="Priority:").grid(row=12, column=0, sticky="e")
+        self.task_priority = ttk.Combobox(self.frame, values=["Low", "Medium", "High"], state="readonly")
+        self.task_priority.grid(row=12, column=1, sticky="w")
+        self.task_priority.set("Medium")
+
+        ttk.Button(self.frame, text="Add Task", command=self.add_task).grid(row=13, column=0, columnspan=2, pady=10)
+
+        self.task_list = ttk.Treeview(self.frame, columns=("ID", "Task", "Employee", "Deadline", "Status", "Priority"), show="headings", height=8)
+        for col in ("ID", "Task", "Employee", "Deadline", "Status", "Priority"):
+            self.task_list.heading(col, text=col)
+        self.task_list.grid(row=14, column=0, columnspan=2, padx=10)
+
+        ttk.Button(self.frame, text="Delete Task", command=self.delete_task).grid(row=15, column=0, pady=5)
+        ttk.Button(self.frame, text="Export Tasks to CSV", command=self.export_to_csv).grid(row=15, column=1, pady=5)
 
         self.load_employees()
         self.load_tasks()
         self.load_employee_dropdown()
-
-    def create_employee_tab(self):
-        ttk.Label(self.employee_tab, text="Employee Name:").grid(row=0, column=0, padx=10, pady=5, sticky='w')
-        self.emp_name = tk.Entry(self.employee_tab)
-        self.emp_name.grid(row=0, column=1, padx=10, pady=5)
-
-        ttk.Label(self.employee_tab, text="Position:").grid(row=1, column=0, padx=10, pady=5, sticky='w')
-        self.emp_position = tk.Entry(self.employee_tab)
-        self.emp_position.grid(row=1, column=1, padx=10, pady=5)
-
-        ttk.Label(self.employee_tab, text="Department:").grid(row=2, column=0, padx=10, pady=5, sticky='w')
-        self.emp_department = tk.Entry(self.employee_tab)
-        self.emp_department.grid(row=2, column=1, padx=10, pady=5)
-
-        self.add_emp_btn = ttk.Button(self.employee_tab, text="Add Employee", command=self.add_employee)
-        self.add_emp_btn.grid(row=3, column=0, columnspan=2, pady=10)
-
-        # Add Treeview with Scrollbars
-        self.emp_list_frame = ttk.Frame(self.employee_tab)
-        self.emp_list_frame.grid(row=4, column=0, columnspan=2, padx=10, pady=5)
-
-        self.emp_list = ttk.Treeview(self.emp_list_frame, columns=("ID", "Name", "Position", "Department"), show="headings", height=10)
-        for col in ("ID", "Name", "Position", "Department"):
-            self.emp_list.heading(col, text=col)
-        self.emp_list.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
-
-        self.emp_scrollbar = ttk.Scrollbar(self.emp_list_frame, orient=tk.VERTICAL, command=self.emp_list.yview)
-        self.emp_list.configure(yscrollcommand=self.emp_scrollbar.set)
-        self.emp_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
-
-        self.del_emp_btn = ttk.Button(self.employee_tab, text="Delete Employee", command=self.delete_employee)
-        self.del_emp_btn.grid(row=5, column=0, columnspan=2, pady=5)
 
     def load_employees(self):
         self.emp_list.delete(*self.emp_list.get_children())
@@ -134,7 +182,10 @@ class EmployeeTaskApp:
 
     def load_tasks(self):
         self.task_list.delete(*self.task_list.get_children())
-        for task in cursor.execute("SELECT tasks.id, tasks.task_name, employees.name, tasks.deadline, tasks.status, tasks.priority FROM tasks LEFT JOIN employees ON tasks.employee_id = employees.id").fetchall():
+        for task in cursor.execute("""
+            SELECT tasks.id, tasks.task_name, employees.name, tasks.deadline, tasks.status, tasks.priority 
+            FROM tasks LEFT JOIN employees ON tasks.employee_id = employees.id
+        """).fetchall():
             self.task_list.insert("", "end", values=task)
 
     def load_employee_dropdown(self):
@@ -160,51 +211,6 @@ class EmployeeTaskApp:
                 conn.commit()
                 self.load_employees()
                 self.load_employee_dropdown()
-
-    def create_task_tab(self):
-        ttk.Label(self.task_tab, text="Task Name:").grid(row=0, column=0, padx=10, pady=5)
-        self.task_name = tk.Entry(self.task_tab)
-        self.task_name.grid(row=0, column=1, padx=10, pady=5)
-
-        ttk.Label(self.task_tab, text="Assign To:").grid(row=1, column=0, padx=10, pady=5)
-        self.task_emp = ttk.Combobox(self.task_tab)
-        self.task_emp.grid(row=1, column=1, padx=10, pady=5)
-
-        ttk.Label(self.task_tab, text="Deadline:").grid(row=2, column=0, padx=10, pady=5)
-        self.task_deadline = DateEntry(self.task_tab, date_pattern='yyyy-mm-dd')
-        self.task_deadline.grid(row=2, column=1, padx=10, pady=5)
-
-        ttk.Label(self.task_tab, text="Status:").grid(row=3, column=0, padx=10, pady=5)
-        self.task_status = ttk.Combobox(self.task_tab, values=["Pending", "In Progress", "Completed"], state='readonly')
-        self.task_status.grid(row=3, column=1, padx=10, pady=5)
-        self.task_status.set("Pending")
-
-        ttk.Label(self.task_tab, text="Priority:").grid(row=4, column=0, padx=10, pady=5)
-        self.task_priority = ttk.Combobox(self.task_tab, values=["Low", "Medium", "High"], state="readonly")
-        self.task_priority.grid(row=4, column=1, padx=10, pady=5)
-        self.task_priority.set("Medium")
-
-        self.add_task_btn = ttk.Button(self.task_tab, text="Add Task", command=self.add_task)
-        self.add_task_btn.grid(row=5, column=0, columnspan=2, pady=10)
-
-        # Add Treeview with Scrollbars
-        self.task_list_frame = ttk.Frame(self.task_tab)
-        self.task_list_frame.grid(row=6, column=0, columnspan=2, padx=10, pady=5)
-
-        self.task_list = ttk.Treeview(self.task_list_frame, columns=("ID", "Task", "Employee", "Deadline", "Status", "Priority"), show="headings", height=10)
-        for col in ("ID", "Task", "Employee", "Deadline", "Status", "Priority"):
-            self.task_list.heading(col, text=col)
-        self.task_list.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
-
-        self.task_scrollbar = ttk.Scrollbar(self.task_list_frame, orient=tk.VERTICAL, command=self.task_list.yview)
-        self.task_list.configure(yscrollcommand=self.task_scrollbar.set)
-        self.task_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
-
-        self.del_task_btn = ttk.Button(self.task_tab, text="Delete Task", command=self.delete_task)
-        self.del_task_btn.grid(row=7, column=0, columnspan=2, pady=5)
-
-        self.export_csv_btn = ttk.Button(self.task_tab, text="Export Tasks to CSV", command=self.export_to_csv)
-        self.export_csv_btn.grid(row=8, column=0, columnspan=2, pady=5)
 
     def add_task(self):
         task_name = self.task_name.get()
@@ -237,7 +243,10 @@ class EmployeeTaskApp:
                 self.load_tasks()
 
     def export_to_csv(self):
-        tasks = cursor.execute("SELECT tasks.id, tasks.task_name, employees.name, tasks.deadline, tasks.status, tasks.priority FROM tasks LEFT JOIN employees ON tasks.employee_id = employees.id").fetchall()
+        tasks = cursor.execute("""
+            SELECT tasks.id, tasks.task_name, employees.name, tasks.deadline, tasks.status, tasks.priority 
+            FROM tasks LEFT JOIN employees ON tasks.employee_id = employees.id
+        """).fetchall()
         with open("tasks_export.csv", "w", newline="") as file:
             writer = csv.writer(file)
             writer.writerow(["ID", "Task", "Employee", "Deadline", "Status", "Priority"])
