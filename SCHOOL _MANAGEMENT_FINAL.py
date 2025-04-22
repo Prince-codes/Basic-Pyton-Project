@@ -21,6 +21,7 @@ cur.execute("USE school_management")
 cur.execute("CREATE TABLE IF NOT EXISTS students (admission_no INT AUTO_INCREMENT PRIMARY KEY,first_name VARCHAR(255),last_name VARCHAR(255),class VARCHAR(50),dob DATE,address VARCHAR(255),contact_no VARCHAR(15))")
 cur.execute("CREATE TABLE IF NOT EXISTS left_students (admission_no INT AUTO_INCREMENT PRIMARY KEY,first_name VARCHAR(255),last_name VARCHAR(255),class VARCHAR(50),dob DATE,address VARCHAR(255),contact_no VARCHAR(15))")
 
+
 #Creating Table for Teacher
 cur.execute("CREATE TABLE IF NOT EXISTS teachers ( teacher_id INT AUTO_INCREMENT PRIMARY KEY, first_name VARCHAR(50),last_name VARCHAR(50),contact_number VARCHAR(15),qualification VARCHAR(100),subjects VARCHAR(100),designation VARCHAR(50))")
 cur.execute("CREATE TABLE IF NOT EXISTS left_teachers ( teacher_id INT PRIMARY KEY, first_name VARCHAR(50),last_name VARCHAR(50),contact_number VARCHAR(15),qualification VARCHAR(100),subjects VARCHAR(100),designation VARCHAR(50))")

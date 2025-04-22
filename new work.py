@@ -69,7 +69,7 @@ if not cursor.fetchone():
     conn.commit()
 
 class LoginWindow:
-    def _init_(self, root):
+    def __init__(self, root):
         self.root = root
         self.root.title("Login")
         self.root.geometry("600x300")
@@ -96,12 +96,12 @@ class LoginWindow:
             messagebox.showerror("Login Failed", "Invalid username or password")
 
 class EmployeeTaskApp:
-    def _init_(self, root):
+    def __init__(self, root):
         self.root = root
         self.root.title("Employee and Task Management")
         self.root.geometry("1366x768")
 
-        self.dark_mode = False
+        self.dark_mode = False              
         ttk.Button(self.root, text="Toggle Dark Mode", command=self.toggle_theme).pack(side="top", anchor="ne", padx=10, pady=5)
 
         style = ttk.Style()
